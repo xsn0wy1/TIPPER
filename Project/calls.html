@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Videollamadas | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <script src="JS/js.js"></script>
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="passwords.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="intro">
+      <h1 id="calls-title">Videollamadas y Llamadas</h1>
+      <p id="calls-desc">Aprende a usar las aplicaciones más populares para comunicarte con tus seres queridos.</p>
+    </section>
+    <section id="tips">
+      <div class="card" onclick="window.location.href='tip-whatsapp.html'">
+        <h2 id="card-whatsapp-title">Videollamadas en WhatsApp</h2>
+        <p id="card-whatsapp-desc">Cómo hacer una videollamada paso a paso usando WhatsApp.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-zoom.html'">
+        <h2 id="card-zoom-title">Videollamadas en Zoom</h2>
+        <p id="card-zoom-desc">Únete y organiza reuniones virtuales fácilmente con Zoom.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-skype.html'">
+        <h2 id="card-skype-title">Videollamadas en Skype</h2>
+        <p id="card-skype-desc">Guía para realizar videollamadas y llamadas de voz en Skype.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-telefono.html'">
+        <h2 id="card-phone-title">Llamadas telefónicas básicas</h2>
+        <p id="card-phone-desc">Aprende a hacer y recibir llamadas desde tu teléfono móvil.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-facetime.html'">
+        <h2 id="card-facetime-title">Videollamadas en FaceTime</h2>
+        <p id="card-facetime-desc">Cómo usar FaceTime para comunicarte con otros usuarios de Apple.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>

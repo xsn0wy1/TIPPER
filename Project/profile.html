@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Perfil | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <link rel="stylesheet" href="CSS/profile.css">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="video.html">Videollamadas</a>
+      <a href="contra.html">Contraseñas</a>
+      <a href="internet.html">Internet</a>
+      <a href="contact.html">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="./Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><a href="profile.html">Mi perfil</a></li>
+            <li><a href="settings.html">Configuración</a></li>
+            <li><a href="login.html">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="profile-main">
+      <img src="./Elements/pfp.jpg" alt="Foto de perfil" class="profile-pic" id="profile-pic">
+      <div class="profile-name" id="profile-name">nicundo peluriotti</div>
+      <div class="profile-email" id="profile-email">correo@gmail.com</div>
+      <ul class="profile-info-list">
+        <li><span id="label-age">Edad:</span> <span id="profile-age">189 años</span></li>
+        <li><span id="label-city">Ciudad:</span> <span id="profile-city">fedecity</span></li>
+        <li><span id="label-member">Miembro desde:</span> <span id="profile-member">2026</span></li>
+      </ul>
+      <div class="profile-actions">
+        <button id="edit-btn" onclick="window.location.href='profile-editing.html'">Editar perfil</button>
+        <button id="logout-btn" onclick="window.location.href='login.html'">Cerrar sesión</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+  <script src="JS/js.js"></script>
+</body>
+</html>

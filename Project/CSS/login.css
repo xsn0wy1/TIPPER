@@ -1,0 +1,145 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(135deg, #ededed 0%, #f7fafc 100%);
+  color: #232323;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  background: #ededed;
+  color: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5em 2em; /* smaller vertical padding */
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+#logo-img {
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+  background: #ededed;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  display: block;
+  /* "Zoom in" the image inside its box */
+  transform: scale(2.5);
+  /* Optionally, adjust origin if needed */
+  transform-origin: center;
+}
+
+.login-container {
+  background: #fff;
+  max-width: 350px;
+  width: 100%;
+  padding: 2em 2em 1.5em 2em;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 0.7em 0;
+  background: #ededed;
+  border: none;
+  font-size: 1em;
+  font-weight: 700;
+  color: #232323;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.2s;
+}
+
+.tabs button.active {
+  background: #4f8cff;
+  color: #fff;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 0.8em;
+  border: 1.5px solid #ededed;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #f7fafc;
+  color: #232323;
+  transition: border 0.2s;
+}
+
+input:focus {
+  border-color: #4f8cff;
+  outline: none;
+}
+
+button[type="submit"] {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9em 0;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #232323;
+}
+
+.msg {
+  min-height: 1.5em;
+  font-size: 0.95em;
+  color: #ff4f4f;
+  text-align: center;
+}
+
+footer {
+  background: #232323;
+  color: #ededed;
+  text-align: center;
+  padding: 1.2em 0;
+  margin-top: 2em;
+  border-radius: 24px 24px 0 0;
+  font-size: 1em;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <script src="./JS/js.js"></script>
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="contra.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="./Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><h3 id="menu-username">nicundo peluriotti</h3></li>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="intro">
+      <h1>Bienvenido a Tipper</h1>
+      <p>Consejos de tecnología para personas mayores</p>
+    </section>
+    <section id="tips">
+      <a href="video.html" class="card" style="text-decoration:none;">
+        <h2>¿Cómo hacer una videollamada?</h2>
+        <p>Guía paso a paso para usar WhatsApp, Zoom y Skype.</p>
+      </a>
+      <a href="contra.html" class="card" style="text-decoration:none;">
+        <h2>¿Cómo crear una contraseña segura?</h2>
+        <p>Consejos para proteger tus cuentas en línea.</p>
+      </a>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+.contact-main {
+  max-width: 600px;
+  margin: 3em auto 2em auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  padding: 2.5em 2em 2em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  animation: slideUpFadeIn 0.5s cubic-bezier(.33,1.02,.57,.99);
+}
+.contact-main h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 1em;
+  color: #232323;
+  text-align: center;
+}
+.contact-info h2,
+.contact-form-section h2,
+.contact-feedback-section h2 {
+  font-size: 1.25em;
+  color: #4f8cff;
+  margin-bottom: 0.7em;
+  font-weight: 700;
+}
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.contact-info li {
+  margin-bottom: 0.7em;
+  font-size: 1.08em;
+}
+.contact-info strong {
+  min-width: 90px;
+  display: inline-block;
+  color: #232323;
+}
+.contact-info a {
+  color: #4f8cff;
+  text-decoration: none;
+}
+.contact-form-section,
+.contact-feedback-section {
+  margin-top: 1em;
+}
+#contact-form,
+#feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+#contact-form label,
+#feedback-form label {
+  font-weight: 600;
+  color: #4f8cff;
+}
+#contact-form input,
+#contact-form textarea,
+#feedback-form textarea {
+  width: 100%;
+  padding: 0.7em;
+  border: 1.5px solid #ededed;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #f7fafc;
+  color: #232323;
+  transition: border 0.2s;
+  resize: vertical;
+}
+#contact-form input:focus,
+#contact-form textarea:focus,
+#feedback-form textarea:focus {
+  border-color: #4f8cff;
+  outline: none;
+}
+#contact-form-submit,
+#feedback-submit {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9em 0;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+#contact-form-submit:hover,
+#feedback-submit:hover {
+  background: #232323;
+}
+.contact-form-msg,
+.contact-feedback-msg {
+  min-height: 1.5em;
+  font-size: 0.95em;
+  color: #ff4f4f;
+  text-align: center;
+  margin-top: 0.5em;
+}
+@media (max-width: 700px) {
+  .contact-main {
+    margin: 1.5em 0.5em;
+    padding: 1.5em 0.5em;
+  }
+}

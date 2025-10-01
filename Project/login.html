@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/login.css">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="./Elements/Tipper.png" alt="Tipper logo" id="logo-img" />
+    </div>
+  </header>
+  <main>
+    <div class="login-container">
+      <div class="tabs">
+        <button id="login-tab" class="active">Iniciar sesión</button>
+        <button id="register-tab">Registrarse</button>
+      </div>
+      <form id="login-form">
+        <h2>Iniciar sesión</h2>
+        <input type="text" id="login-user" placeholder="Usuario o Email" required>
+        <input type="password" id="login-pass" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+        <p class="msg" id="login-msg"></p>
+      </form>
+      <form id="register-form" style="display:none;">
+        <h2>Registrarse</h2>
+        <input type="text" id="register-user" placeholder="Usuario" required>
+        <input type="email" id="register-email" placeholder="Email" required>
+        <input type="password" id="register-pass" placeholder="Contraseña" required>
+        <button type="submit">Crear cuenta</button>
+        <p class="msg" id="register-msg"></p>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+  <script src="JS/login.js"></script>
+</body>
+</html>

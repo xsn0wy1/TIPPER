@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Configuración | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <link rel="stylesheet" href="CSS/settings.css">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="video.html">Videollamadas</a>
+      <a href="contra.html">Contraseñas</a>
+      <a href="contact.html" id="settings-link">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><h3>nicundo peluriotti<h3></li>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="settings-main" id="settings-main">
+      <h1 id="settings-title">Configuración</h1>
+      <form id="settings-form">
+        <div class="settings-group">
+          <label for="font-size" id="label-font-size">Tamaño de fuente</label>
+          <select id="font-size">
+            <option value="normal" id="font-normal">Normal</option>
+            <option value="large" id="font-large">Grande</option>
+            <option value="xlarge" id="font-xlarge">Muy grande</option>
+          </select>
+        </div>
+        <div class="settings-group">
+          <label for="contrast" id="label-contrast">Contraste</label>
+          <select id="contrast">
+            <option value="normal" id="contrast-normal">Normal</option>
+            <option value="high" id="contrast-high">Alto</option>
+          </select>
+        </div>
+        <div class="settings-group">
+          <label for="dark-mode" id="label-dark-mode">Modo oscuro</label>
+          <label class="switch">
+            <input type="checkbox" id="dark-mode">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-group">
+          <label for="underline-links" id="label-underline-links">Subrayar enlaces</label>
+          <input type="checkbox" id="underline-links">
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+  <script src="JS/js.js"></script>
+  <script src="JS/settings.js"></script>
+</body>
+</html>

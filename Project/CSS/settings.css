@@ -1,0 +1,86 @@
+.settings-main {
+  max-width: 480px;
+  margin: 3em auto 2em auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  padding: 2.5em 2em 2em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUpFadeIn 0.5s cubic-bezier(.33,1.02,.57,.99);
+}
+.settings-main h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 1.5em;
+  color: #232323;
+}
+.settings-group {
+  width: 100%;
+  margin-bottom: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.settings-group label {
+  font-weight: 600;
+  color: #4f8cff;
+  margin-right: 1em;
+  min-width: 60px;
+}
+.settings-group select,
+.settings-group input[type="checkbox"] {
+  font-size: 1em;
+  padding: 0.4em 0.7em;
+  border-radius: 6px;
+  border: 1.5px solid #ededed;
+  background: #f7fafc;
+  color: #232323;
+  transition: border 0.2s;
+}
+.settings-group select:focus {
+  border-color: #4f8cff;
+  outline: none;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ededed;
+  transition: .4s;
+  border-radius: 28px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px; bottom: 4px;
+  background-color: #fff;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px #0001;
+}
+input:checked + .slider {
+  background-color: #4f8cff;
+}
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+@media (max-width: 600px) {
+  .settings-main {
+    margin: 1.5em 0.5em;
+    padding: 1.5em 0.5em;
+  }
+}

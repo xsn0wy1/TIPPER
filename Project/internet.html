@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Internet | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <script src="JS/js.js"></script>
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="passwords.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="intro">
+      <h1 id="internet-title">Consejos de Internet</h1>
+      <p id="internet-desc">Aprende a navegar, buscar información y mantenerte seguro en Internet.</p>
+    </section>
+    <section id="tips">
+      <div class="card" onclick="window.location.href='tip-wifi.html'">
+        <h2 id="card-wifi-title">Cómo conectarse a Wi-Fi</h2>
+        <p id="card-wifi-desc">Guía para conectarte a redes Wi-Fi en casa y en lugares públicos.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-browser.html'">
+        <h2 id="card-browser-title">Usar un navegador web</h2>
+        <p id="card-browser-desc">Aprende a usar Chrome, Safari, Edge y otros navegadores.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-search.html'">
+        <h2 id="card-search-title">Buscar información en Internet</h2>
+        <p id="card-search-desc">Consejos para encontrar lo que necesitas usando Google y otros buscadores.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-security.html'">
+        <h2 id="card-security-title">Seguridad en Internet</h2>
+        <p id="card-security-desc">Cómo proteger tus datos y evitar fraudes en línea.</p>
+      </div>
+      <div class="card" onclick="window.location.href='tip-email.html'">
+        <h2 id="card-email-title">Correo electrónico seguro</h2>
+        <p id="card-email-desc">Aprende a enviar, recibir y proteger tus emails.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>
