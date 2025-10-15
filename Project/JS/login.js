@@ -124,6 +124,14 @@ document.addEventListener("DOMContentLoaded", function () {
     langBtn.style.cursor = 'pointer';
     header.appendChild(langBtn);
 
+      langBtn.addEventListener("mouseover", () => {
+  langBtn.style.background = "black";
+});
+
+langBtn.addEventListener("mouseout", () => {
+  langBtn.style.background = "#4f8cff";
+});
+
     let spanish = localStorage.getItem('tipperLang') !== 'en';
 
     function setSpanish() {
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
       langBtn.textContent = "ES";
       document.title = "Login | Tipper";
       document.getElementById('login-tab').textContent = "Login";
-      document.getElementById('register-tab').textContent = "Register";
+      document.getElementById('register-tab').textContent = "Sign Up";
       document.querySelector('#login-form h2').textContent = "Login";
       document.getElementById('login-user').placeholder = "Username or Email";
       document.getElementById('login-pass').placeholder = "Password";
@@ -194,4 +202,30 @@ document.addEventListener("DOMContentLoaded", function () {
       clearMsgs();
     };
   }
+
+  // Show/Hide password buttons
+  function initShowHideButtons() {
+    document.querySelectorAll('.show-pass').forEach(button => {
+      // associated input is the previous sibling input inside .password-field
+      const pwInput = button.parentElement.querySelector('input');
+      if (!pwInput) return;
+
+      button.addEventListener('click', () => {
+        const isNowShown = button.classList.toggle('active');
+        pwInput.type = isNowShown ? 'text' : 'password';
+        button.setAttribute('aria-pressed', String(isNowShown));
+        button.setAttribute('aria-label', isNowShown ? 'Ocultar contraseña' : 'Mostrar contraseña');
+        // small animation pulse
+        button.animate([{ transform: 'translateY(-50%) scale(1)' }, { transform: 'translateY(-50%) scale(1.06)' }, { transform: 'translateY(-50%) scale(1)' }], { duration: 320, easing: 'ease-out' });
+      });
+      // keep state in sync if input's type is changed elsewhere
+      const observer = new MutationObserver(() => {
+        const shown = pwInput.type === 'text';
+        button.classList.toggle('active', shown);
+        button.setAttribute('aria-pressed', String(shown));
+      });
+      observer.observe(pwInput, { attributes: true, attributeFilter: ['type'] });
+    });
+  }
+  initShowHideButtons();
 });

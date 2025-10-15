@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="CSS/contact.css">
   <script src="JS/js.js"></script>
   <script src="JS/contact.js"></script>
+  <link rel="icon" type="image/png" href="Elements/favicon.png">
 </head>
 <body>
   <header>
@@ -29,6 +30,7 @@
         <div id="pfp-menu" class="pfp-menu">
           <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
           <ul>
+            <li><h3 id="menu-username">User1</h3></li>
             <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
             <li><a href="settings.html" id="menu-settings">Configuración</a></li>
             <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
@@ -59,15 +61,6 @@
           <textarea id="message" name="message" rows="4" required maxlength="500"></textarea>
           <button type="submit" id="contact-form-submit">Enviar</button>
           <div class="contact-form-msg" id="contact-form-msg"></div>
-        </form>
-      </div>
-      <div class="contact-feedback-section">
-        <h2 id="contact-feedback-title">¿Tienes sugerencias?</h2>
-        <form id="feedback-form" autocomplete="off">
-          <label for="feedback" id="feedback-label">Tu opinión</label>
-          <textarea id="feedback" name="feedback" rows="3" required maxlength="300"></textarea>
-          <button type="submit" id="feedback-submit">Enviar sugerencia</button>
-          <div class="contact-feedback-msg" id="contact-feedback-msg"></div>
         </form>
       </div>
     </section>

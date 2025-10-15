@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="CSS/profile-editing.css">
   <script src="JS/profile.js"></script>
   <script src="JS/js.js"></script>
+  <link rel="icon" type="image/png" href="Elements/favicon.png">
 </head>
 <body>
   <header>
@@ -18,11 +19,11 @@
       <span id="logo-text">Tipper</span>
     </div>
     <nav>
-      <a href="index.html">Inicio</a>
-      <a href="video.html">Videollamadas</a>
-      <a href="contra.html">Contraseñas</a>
-      <a href="internet.html">Internet</a>
-      <a href="contact.html">Contacto</a>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="contra.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
       <div class="pfp-menu-container">
         <button id="pfp-btn">
           <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
@@ -46,7 +47,7 @@
         <img src="./Elements/pfp.jpg" alt="Foto de perfil" class="edit-profile-pic" id="edit-profile-pic" tabindex="0">
         
         <label for="edit-name" id="label-name">Nombre</label>
-        <input type="text" id="edit-name" value="nicundo peluriotti" required minlength="2" maxlength="32">
+        <input type="text" id="edit-name" value="User1" required minlength="2" maxlength="32">
 
         <label for="edit-email" id="label-email">Correo electrónico</label>
         <input type="email" id="edit-email" value="correo@gmail.com" required maxlength="64">
