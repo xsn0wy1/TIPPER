@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Perfil | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <link rel="stylesheet" href="CSS/profile.css">
+  <script src="JS/js.js"></script>
+  <link rel="icon" type="image/png" href="Elements/favicon.png">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="contra.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="./Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><h3 id="menu-username">User1</h3></li>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="profile-grid">
+      <section class="profile-main">
+        <img src="./Elements/pfp.jpg" alt="Foto de perfil" class="profile-pic" id="profile-pic">
+        <div class="profile-name" id="profile-name">User1</div>
+        <div class="profile-email" id="profile-email">correo@gmail.com</div>
+        <ul class="profile-info-list">
+          <li><span id="label-age">Edad:</span> <span id="profile-age">189 años</span></li>
+          <li><span id="label-city">Ciudad:</span> <span id="profile-city">fedecity</span></li>
+          <li><span id="label-member">Miembro desde:</span> <span id="profile-member">2026</span></li>
+        </ul>
+        <div class="profile-actions">
+          <button id="edit-btn" onclick="window.location.href='profile-editing.html'">Editar perfil</button>
+          <button id="logout-btn" onclick="window.location.href='login.html'">Cerrar sesión</button>
+        </div>
+      </section>
+      <aside id="bookmarks-panel" class="bookmarks-panel" aria-label="Tips guardados">
+        <header class="bookmarks-header">
+          <h3>Guardados</h3>
+          <small id="bookmarks-count">0</small>
+        </header>
+        <div id="bookmarks-list" class="bookmarks-list" role="list">
+        </div>
+        <div id="bookmarks-empty" class="bookmarks-empty">No tenés tips guardados.</div>
+      </aside>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,190 @@
+html, body {
+  height: 100%;
+  /* allow page to scroll normally */
+}
+body {
+  min-height: 100vh;
+}
+
+/* page-level layout: two separate cards side-by-side */
+.profile-grid {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 980px;
+  margin: 2.2em auto;
+  padding: 0;               /* container transparent so children are separate cards */
+  background: transparent;
+}
+
+/* left column: keep your original profile card styling exactly */
+.profile-main {
+  max-width: 420px;
+  margin: 0; /* controlled by grid */
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  padding: 2.5em 2em 2em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-pic {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4f8cff;
+  background: #ededed;
+  margin-bottom: 1.2em;
+}
+.profile-name {
+  font-size: 1.6em;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+  color: #000000;
+}
+.profile-email {
+  color: #4f8cff;
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+}
+.profile-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 1em;
+}
+.profile-actions button {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9em 0;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.profile-actions button:hover {
+  background: #232323;
+}
+.profile-info-list {
+  width: 100%;
+  margin: 1.5em 0 0 0;
+  padding: 0;
+  list-style: none;
+  color: #232323;
+  font-size: 1.08em;
+}
+.profile-info-list li {
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.profile-info-list li span {
+  color: #4f8cff;
+  font-weight: 600;
+  min-width: 90px;
+  display: inline-block;
+}
+
+/* right column: bookmarks card — separate white card, scrollable list inside */
+.bookmarks-panel {
+  width: 360px;
+  max-width: 360px;
+  min-height: 220px;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+.bookmarks-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.bookmarks-header h3 { margin: 0; font-size: 1.05rem; }
+.bookmarks-header small { color:#4f8cff; font-weight:700; }
+
+/* list scroll area */
+.bookmarks-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  padding-right: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  scrollbar-width: thin;
+  scrollbar-color: #4f8cff #ededed;
+}
+
+/* Webkit scrollbar styling for bookmarks list */
+.bookmarks-list::-webkit-scrollbar {
+  width: 8px;
+}
+.bookmarks-list::-webkit-scrollbar-track {
+  background: #ededed;
+  border-radius: 4px;
+}
+.bookmarks-list::-webkit-scrollbar-thumb {
+  background: #4f8cff;
+  border-radius: 4px;
+}
+.bookmarks-list::-webkit-scrollbar-thumb:hover {
+  background: #232323;
+}
+
+/* reuse .card-like styling for saved items to match index */
+.bookmarks-list .card {
+  background: #f7fafc;
+  border-radius: 12px;
+  padding: 1rem;
+  display: block;
+  border: 1px solid #e6eefc;
+  box-shadow: none;
+}
+.bookmarks-list .card h2 { font-size: 1.05rem; margin: 0 0 0.35rem 0; }
+.bookmarks-list .card p { margin: 0 0 0.6rem 0; color:#444; font-size:0.98rem; }
+
+/* small actions inside each bookmarked card */
+.bookmarked-card-actions {
+  display:flex;
+  gap:0.6rem;
+  justify-content:flex-end;
+}
+.bookmarked-open,
+.bookmarked-remove {
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  padding:0.25rem 0.45rem;
+  border-radius:8px;
+}
+.bookmarked-open { color:#4f8cff; }
+.bookmarked-remove { color:#ff4f4f; }
+
+.bookmarks-empty {
+  color:#666;
+  padding:1rem;
+  text-align:center;
+  flex-shrink: 0;
+}
+
+/* responsive: stack on small screens */
+@media (max-width: 920px) {
+  .profile-grid { flex-direction: column; align-items: center; padding: 1rem; }
+  .profile-main { width: 100%; max-width: 640px; }
+  .bookmarks-panel { max-width: 100%; width: 100%; }
+}

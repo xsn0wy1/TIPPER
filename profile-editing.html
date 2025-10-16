@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Perfil | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <link rel="stylesheet" href="CSS/profile.css">
+  <link rel="stylesheet" href="CSS/profile-editing.css">
+  <script src="JS/profile.js"></script>
+  <script src="JS/js.js"></script>
+  <link rel="icon" type="image/png" href="Elements/favicon.png">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="contra.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <button id="pfp-btn">
+          <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+        </button>
+        <div id="pfp-menu" class="pfp-menu">
+          <img src="./Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+          <ul>
+            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="edit-profile-main">
+      <form id="edit-profile-form" class="edit-profile-form" autocomplete="off">
+        <label for="edit-pic" id="label-pic">Foto de perfil</label>
+        <input type="file" id="edit-pic" accept="image/*" style="display:none;">
+        <img src="./Elements/pfp.jpg" alt="Foto de perfil" class="edit-profile-pic" id="edit-profile-pic" tabindex="0">
+        
+        <label for="edit-name" id="label-name">Nombre</label>
+        <input type="text" id="edit-name" value="User1" required minlength="2" maxlength="32">
+
+        <label for="edit-email" id="label-email">Correo electrónico</label>
+        <input type="email" id="edit-email" value="correo@gmail.com" required maxlength="64">
+
+        <label for="edit-age" id="label-age">Edad</label>
+        <input type="number" id="edit-age" value="189" min="1" max="120" required>
+
+        <label for="edit-city" id="label-city">Ciudad</label>
+        <input type="text" id="edit-city" value="fedecity" required maxlength="32">
+
+        <div class="edit-profile-actions">
+          <button type="button" class="cancel" id="cancel-btn">Cancelar</button>
+          <button type="submit" id="save-btn">Guardar</button>
+        </div>
+        <div class="edit-profile-msg" id="edit-profile-msg"></div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>
