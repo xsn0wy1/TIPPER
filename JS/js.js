@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Check for welcome notification on login
+  checkWelcomeNotification();
+  
+  // Check user session and load user data
+  checkAndLoadUserSession();
+  
+  // Setup logout button
+  setupLogoutButton();
+
   const nav = document.querySelector('nav');
   let langBtn = document.getElementById('lang-btn');
   if (!langBtn) {
@@ -847,5 +856,132 @@ function showPrev() {
 }
 function showNext() {
   tipsGroups[current].classList.add("exit-right");
+}
+
+/**
+ * Check and show welcome notification after login
+ */
+function checkWelcomeNotification() {
+  try {
+    const userData = localStorage.getItem('tipperUser');
+    if (userData) {
+      const user = JSON.parse(userData);
+      
+      // Check if we should show the welcome notification
+      if (user.showWelcome) {
+        // Wait a moment for the page to load
+        setTimeout(() => {
+          // Get profile picture from the page if available
+          const profilePic = document.querySelector('#pfp-img')?.src || null;
+          
+          // Show welcome notification
+          if (typeof notifications !== 'undefined') {
+            notifications.showWelcome(user.username, profilePic);
+          }
+          
+          // Update username in the menu
+          const menuUsername = document.getElementById('menu-username');
+          if (menuUsername) {
+            menuUsername.textContent = user.username;
+          }
+        }, 500);
+        
+        // Clear the showWelcome flag so it doesn't show again
+        user.showWelcome = false;
+        localStorage.setItem('tipperUser', JSON.stringify(user));
+      }
+    }
+  } catch (error) {
+    console.error('Error showing welcome notification:', error);
+  }
+}
+
+/**
+ * Check user session and load user data
+ */
+async function checkAndLoadUserSession() {
+  try {
+    const response = await fetch('PHP/auth.php?action=check_session');
+    const result = await response.json();
+    
+    if (result.success) {
+      // Update user info in the page
+      const menuUsername = document.getElementById('menu-username');
+      if (menuUsername) {
+        menuUsername.textContent = result.data.username;
+      }
+      
+      // Update all profile pictures on the page
+      const profilePics = document.querySelectorAll('#pfp-img, .pfp-big, #profile-pic, #edit-profile-pic');
+      profilePics.forEach(pic => {
+        if (result.data.profile_picture) {
+          pic.src = result.data.profile_picture;
+        }
+      });
+      
+      // Store user data
+      localStorage.setItem('tipperUser', JSON.stringify({
+        username: result.data.username,
+        email: result.data.email,
+        user_id: result.data.user_id,
+        profile_picture: result.data.profile_picture,
+        showWelcome: false
+      }));
+    } else {
+      // No active session
+      // Only redirect to login on protected pages
+      const protectedPages = ['profile.html', 'profile-editing.html', 'settings.html'];
+      const currentPage = window.location.pathname.split('/').pop();
+      
+      if (protectedPages.includes(currentPage)) {
+        // Redirect to login with return URL
+        window.location.href = 'login.html?return=' + encodeURIComponent(currentPage);
+      }
+    }
+  } catch (error) {
+    console.error('Error checking session:', error);
+  }
+}
+
+/**
+ * Setup logout button functionality
+ */
+function setupLogoutButton() {
+  const logoutBtn = document.getElementById('menu-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      
+      const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
+      
+      try {
+        const response = await fetch('PHP/auth.php?action=logout');
+        const result = await response.json();
+        
+        if (result.success) {
+          // Clear local storage
+          localStorage.removeItem('tipperUser');
+          
+          // Show logout notification
+          if (typeof notifications !== 'undefined') {
+            notifications.info(
+              lang === 'en' ? 'Logged Out' : 'Sesión cerrada',
+              lang === 'en' ? 'See you soon!' : '¡Hasta pronto!'
+            );
+          }
+          
+          // Redirect to login
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1000);
+        }
+      } catch (error) {
+        console.error('Error logging out:', error);
+        // Force logout anyway
+        localStorage.removeItem('tipperUser');
+        window.location.href = 'login.html';
+      }
+    });
+  }
 }
 

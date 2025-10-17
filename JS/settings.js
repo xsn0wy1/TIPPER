@@ -72,6 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Apply settings on all pages
   loadSettings();
+  
+  // Load and save settings to database
+  loadDatabaseSettings();
+  
+  // Save settings to database when changed
+  fontSize.addEventListener('change', saveDatabaseSettings);
+  contrast.addEventListener('change', saveDatabaseSettings);
+  darkMode.addEventListener('change', saveDatabaseSettings);
+  underlineLinks.addEventListener('change', saveDatabaseSettings);
 
   // --- Language Switcher Integration ---
   function setSpanish() {
@@ -123,3 +132,77 @@ document.addEventListener("DOMContentLoaded", function () {
   if (lang === 'en') setEnglish();
   else setSpanish();
 });
+
+/**
+ * Load settings from database
+ */
+async function loadDatabaseSettings() {
+  try {
+    const response = await fetch('PHP/settings.php?action=get_settings');
+    const result = await response.json();
+
+    if (result.success) {
+      const settings = result.data;
+      
+      // Apply theme from database
+      if (settings.theme) {
+        const isDark = settings.theme === 'dark';
+        const darkModeCheckbox = document.getElementById('dark-mode');
+        if (darkModeCheckbox) {
+          darkModeCheckbox.checked = isDark;
+          setDarkMode(isDark);
+        }
+      }
+      
+      // Apply language from database
+      if (settings.language) {
+        localStorage.setItem('tipperLang', settings.language);
+      }
+      
+      // Store notifications preference
+      if (settings.notifications_enabled !== undefined) {
+        localStorage.setItem('tipperNotifications', settings.notifications_enabled);
+      }
+    }
+  } catch (error) {
+    console.error('Error loading settings from database:', error);
+  }
+}
+
+/**
+ * Save settings to database
+ */
+async function saveDatabaseSettings() {
+  try {
+    const darkModeCheckbox = document.getElementById('dark-mode');
+    const theme = darkModeCheckbox && darkModeCheckbox.checked ? 'dark' : 'light';
+    const language = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
+    
+    const response = await fetch('PHP/settings.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams({
+        action: 'update_settings',
+        theme: theme,
+        language: language,
+        notifications_enabled: 1,
+        email_notifications: 1
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Show success notification
+      if (typeof notifications !== 'undefined') {
+        const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
+        notifications.success(
+          lang === 'en' ? 'Settings Saved' : 'Configuración guardada',
+          lang === 'en' ? 'Your preferences have been updated' : 'Tus preferencias se han actualizado'
+        );
+      }
+    }
+  } catch (error) {
+    console.error('Error saving settings to database:', error);
+  }
+}

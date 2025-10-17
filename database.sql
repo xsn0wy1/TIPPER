@@ -1,10 +1,10 @@
 -- Database creation for Tipper website
 -- Run this file in your MySQL/MariaDB server to create the database structure
 
-CREATE DATABASE IF NOT EXISTS tipper_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS db_tipper CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE tipper_db;
-
+USE db_tipper;
+    
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -66,8 +66,7 @@ CREATE TABLE IF NOT EXISTS user_settings (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insert sample data (optional - for testing)
--- Password for all sample users is 'password123' (hashed)
+-- Insert sample data
 INSERT INTO users (username, email, password, full_name, age, city) VALUES
 ('User1', 'correo@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Usuario Ejemplo', 189, 'fedecity'),
 ('admin', 'admin@tipper.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador', 30, 'Montevideo');

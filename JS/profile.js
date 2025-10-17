@@ -19,8 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "profile.html";
   };
 
-  // Save button validation and fake save
-  document.getElementById('edit-profile-form').onsubmit = function(e) {
+  // Load user profile from database
+  loadUserProfile();
+
+  // Save button validation and database update
+  document.getElementById('edit-profile-form').onsubmit = async function(e) {
     e.preventDefault();
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
@@ -55,12 +58,47 @@ document.addEventListener("DOMContentLoaded", function () {
       msg.textContent = lang === 'en' ? "City must be at least 2 characters." : "La ciudad debe tener al menos 2 caracteres.";
       return;
     }
-    msg.style.color = "#4f8cff";
-    msg.textContent = lang === 'en' ? "Profile saved! Redirecting..." : "¡Perfil guardado! Redirigiendo...";
-    setTimeout(() => {
-      // Simulate save and redirect
-      window.location.href = "profile.html";
-    }, 1200);
+
+    // Save to database
+    try {
+      const response = await fetch('PHP/user.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+          action: 'update_profile',
+          full_name: name,
+          email: email,
+          age: age,
+          city: city
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        msg.style.color = "#4f8cff";
+        msg.textContent = lang === 'en' ? "Profile saved! Redirecting..." : "¡Perfil guardado! Redirigiendo...";
+        
+        // Show success notification
+        if (typeof notifications !== 'undefined') {
+          notifications.success(
+            lang === 'en' ? 'Profile Updated' : 'Perfil actualizado',
+            lang === 'en' ? 'Your changes have been saved' : 'Tus cambios se han guardado'
+          );
+        }
+        
+        setTimeout(() => {
+          window.location.href = "profile.html";
+        }, 1200);
+      } else {
+        msg.style.color = "#ff4f4f";
+        msg.textContent = result.message || (lang === 'en' ? 'Error saving profile' : 'Error al guardar perfil');
+      }
+    } catch (error) {
+      msg.style.color = "#ff4f4f";
+      msg.textContent = lang === 'en' ? 'Connection error. Please try again.' : 'Error de conexión. Intenta de nuevo.';
+      console.error('Error:', error);
+    }
   };
 
   // --- Language Switcher for this page ---
@@ -108,3 +146,63 @@ document.addEventListener("DOMContentLoaded", function () {
   if (lang === 'en') setEditProfileEnglish();
   else setEditProfileSpanish();
 });
+
+/**
+ * Load user profile from database
+ */
+async function loadUserProfile() {
+  try {
+    const response = await fetch('PHP/user.php?action=get_profile');
+    const result = await response.json();
+
+    if (result.success) {
+      const user = result.data;
+      
+      // Update form fields if they exist
+      if (document.getElementById('edit-name')) {
+        document.getElementById('edit-name').value = user.full_name || '';
+      }
+      if (document.getElementById('edit-email')) {
+        document.getElementById('edit-email').value = user.email || '';
+      }
+      if (document.getElementById('edit-age')) {
+        document.getElementById('edit-age').value = user.age || '';
+      }
+      if (document.getElementById('edit-city')) {
+        document.getElementById('edit-city').value = user.city || '';
+      }
+      
+      // Update profile display if on profile.html
+      if (document.getElementById('profile-name')) {
+        document.getElementById('profile-name').textContent = user.username || 'User';
+      }
+      if (document.getElementById('profile-email')) {
+        document.getElementById('profile-email').textContent = user.email || '';
+      }
+      if (document.getElementById('profile-age')) {
+        document.getElementById('profile-age').textContent = user.age ? user.age + ' años' : '';
+      }
+      if (document.getElementById('profile-city')) {
+        document.getElementById('profile-city').textContent = user.city || '';
+      }
+      if (document.getElementById('profile-member')) {
+        document.getElementById('profile-member').textContent = user.member_since || '2025';
+      }
+      
+      // Update profile picture
+      if (user.profile_picture && document.getElementById('profile-pic')) {
+        document.getElementById('profile-pic').src = user.profile_picture;
+      }
+      if (user.profile_picture && document.getElementById('edit-profile-pic')) {
+        document.getElementById('edit-profile-pic').src = user.profile_picture;
+      }
+    } else {
+      // Not logged in, redirect to login
+      if (result.message && result.message.includes('sesión')) {
+        window.location.href = 'login.html';
+      }
+    }
+  } catch (error) {
+    console.error('Error loading profile:', error);
+  }
+}

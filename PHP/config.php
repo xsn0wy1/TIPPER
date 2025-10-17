@@ -6,7 +6,7 @@
 
 // Database configuration
 define('DB_HOST', 'localhost');        // Database host (usually 'localhost')
-define('DB_NAME', 'tipper_db');        // Database name
+define('DB_NAME', 'db_tipper');        // Database name
 define('DB_USER', 'root');             // Database username
 define('DB_PASS', '');                 // Database password
 define('DB_CHARSET', 'utf8mb4');       // Database charset

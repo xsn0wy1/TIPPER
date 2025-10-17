@@ -45,45 +45,84 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Login validation
-  document.getElementById('login-form').onsubmit = function(e) {
+  // Login validation with database integration
+  document.getElementById('login-form').onsubmit = async function(e) {
     e.preventDefault();
     const user = document.getElementById('login-user').value.trim();
     const pass = document.getElementById('login-pass').value;
     const msg = document.getElementById('login-msg');
     const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
-    if (user.length < 4) {
+    
+    if (user.length < 3) {
       msg.style.color = "#ff4f4f";
       msg.textContent = messages[lang].loginUserShort;
       return;
     }
-    if (pass.length < 8) {
+    if (pass.length < 6) {
       msg.style.color = "#ff4f4f";
       msg.textContent = messages[lang].loginPassShort;
       return;
     }
-    // Simulated login: redirect to index.html on success
-    if ((user === "usuario" && pass === "1234abcd") || (user === "user" && pass === "1234abcd")) {
-      msg.style.color = "#4f8cff";
-      msg.textContent = messages[lang].loginSuccess;
-      setTimeout(() => window.location.href = "index.html", 1000);
-    } else {
+
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = lang === 'en' ? 'Signing in...' : 'Iniciando sesión...';
+
+    try {
+      // Make API call to login
+      const response = await fetch('PHP/auth.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+          action: 'login',
+          username: user,
+          password: pass
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        msg.style.color = "#4f8cff";
+        msg.textContent = messages[lang].loginSuccess;
+        
+        // Store user data for welcome notification
+        localStorage.setItem('tipperUser', JSON.stringify({
+          username: result.data.username,
+          email: result.data.email,
+          showWelcome: true
+        }));
+
+        setTimeout(() => {
+          window.location.href = result.data.redirect || "index.html";
+        }, 800);
+      } else {
+        msg.style.color = "#ff4f4f";
+        msg.textContent = result.message || messages[lang].loginFail;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    } catch (error) {
+      console.error('Login error:', error);
       msg.style.color = "#ff4f4f";
-      msg.textContent = messages[lang].loginFail;
+      msg.textContent = lang === 'en' ? 'Connection error. Please try again.' : 'Error de conexión. Intenta de nuevo.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
     }
   };
 
-  // Register validation
-  document.getElementById('register-form').onsubmit = function(e) {
+  // Register validation with database integration
+  document.getElementById('register-form').onsubmit = async function(e) {
     e.preventDefault();
     const user = document.getElementById('register-user').value.trim();
     const email = document.getElementById('register-email').value.trim();
     const pass = document.getElementById('register-pass').value;
     const msg = document.getElementById('register-msg');
     const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
-    const userRegex = /^[a-zA-Z0-9]{3,16}$/; // 4-16 chars, no special chars
+    const userRegex = /^[a-zA-Z0-9_]{3,16}$/; // 3-16 chars
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passRegex = /^[a-zA-Z0-9]{8,}$/; // at least 8 chars, no special chars
 
     if (!userRegex.test(user)) {
       msg.style.color = "#ff4f4f";
@@ -95,17 +134,60 @@ document.addEventListener("DOMContentLoaded", function () {
       msg.textContent = messages[lang].regEmail;
       return;
     }
-    if (!passRegex.test(pass)) {
+    if (pass.length < 6) {
       msg.style.color = "#ff4f4f";
       msg.textContent = messages[lang].regPass;
       return;
     }
-    msg.style.color = "#4f8cff";
-    msg.textContent = messages[lang].regSuccess;
-    setTimeout(() => {
-      document.getElementById('login-tab').click();
-      msg.textContent = "";
-    }, 1200);
+
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = lang === 'en' ? 'Creating account...' : 'Creando cuenta...';
+
+    try {
+      // Make API call to register
+      const response = await fetch('PHP/auth.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+          action: 'register',
+          username: user,
+          email: email,
+          password: pass
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        msg.style.color = "#4f8cff";
+        msg.textContent = messages[lang].regSuccess;
+        
+        // Store user data for welcome notification
+        localStorage.setItem('tipperUser', JSON.stringify({
+          username: result.data.username,
+          email: result.data.email,
+          showWelcome: true
+        }));
+
+        setTimeout(() => {
+          window.location.href = result.data.redirect || "index.html";
+        }, 800);
+      } else {
+        msg.style.color = "#ff4f4f";
+        msg.textContent = result.message;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    } catch (error) {
+      console.error('Register error:', error);
+      msg.style.color = "#ff4f4f";
+      msg.textContent = lang === 'en' ? 'Connection error. Please try again.' : 'Error de conexión. Intenta de nuevo.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
   };
 
   // Language switcher for login/register page
