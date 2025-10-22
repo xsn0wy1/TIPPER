@@ -66,10 +66,3 @@ CREATE TABLE IF NOT EXISTS user_settings (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insert sample data
-INSERT INTO users (username, email, password, full_name, age, city) VALUES
-('User1', 'correo@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Usuario Ejemplo', 189, 'fedecity'),
-('admin', 'admin@tipper.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrador', 30, 'Montevideo');
-
--- Insert default settings for sample users
-INSERT INTO user_settings (user_id) VALUES (1), (2);

@@ -4,11 +4,11 @@
  * Configure your database connection settings here
  */
 
-// Database configuration
-define('DB_HOST', 'localhost');        // Database host (usually 'localhost')
+// Database configuration - ADJUST THESE SETTINGS FOR YOUR HOSTING
+define('DB_HOST', 'localhost');        // Database host
 define('DB_NAME', 'db_tipper');        // Database name
-define('DB_USER', 'root');             // Database username
-define('DB_PASS', '');                 // Database password
+define('DB_USER', 'root');             // Database username - change for your hosting
+define('DB_PASS', '');                 // Database password - change for your hosting
 define('DB_CHARSET', 'utf8mb4');       // Database charset
 
 // Site configuration
@@ -28,6 +28,10 @@ date_default_timezone_set('America/Montevideo');
 
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_secure', 0); // Set to 1 if using HTTPS
+    session_name('TIPPER_SESSION');
     session_start();
 }
 

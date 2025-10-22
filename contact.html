@@ -26,17 +26,32 @@
       <a href="internet.html" id="nav-internet">Internet</a>
       <a href="contact.html" id="nav-contacto">Contacto</a>
       <div class="pfp-menu-container">
-        <button id="pfp-btn">
-          <img src="Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
-        </button>
-        <div id="pfp-menu" class="pfp-menu">
-          <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
-          <ul>
-            <li><h3 id="menu-username">User1</h3></li>
-            <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
-            <li><a href="settings.html" id="menu-settings">Configuración</a></li>
-            <li><a href="login.html" id="menu-logout">Cerrar sesión</a></li>
-          </ul>
+        <!-- Not Logged In Version -->
+        <div id="guest-menu" class="guest-menu" style="display: none;">
+          <a href="login.html" class="login-btn" id="guest-login-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span id="guest-login-text">Iniciar sesión</span>
+          </a>
+        </div>
+        
+        <!-- Logged In Version -->
+        <div id="user-menu" class="user-menu" style="display: none;">
+          <button id="pfp-btn">
+            <img src="Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+          </button>
+          <div id="pfp-menu" class="pfp-menu">
+            <img src="Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+            <ul>
+              <li><h3 id="menu-username">Usuario</h3></li>
+              <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+              <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+              <li><a href="#" id="menu-logout">Cerrar sesión</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

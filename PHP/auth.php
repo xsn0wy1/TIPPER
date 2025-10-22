@@ -6,7 +6,17 @@
 
 require_once 'config.php';
 
+// Set headers for CORS and JSON
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
@@ -148,22 +158,31 @@ function handleLogin() {
  * Handle user logout
  */
 function handleLogout() {
-    if (isset($_SESSION['user_id'])) {
-        $userId = $_SESSION['user_id'];
-        
-        try {
+    try {
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            
             $db = getDB();
             // Delete user session from database
             $stmt = $db->prepare("DELETE FROM user_sessions WHERE user_id = ?");
             $stmt->execute([$userId]);
-        } catch (PDOException $e) {
-            // Continue with logout even if database deletion fails
         }
+    } catch (PDOException $e) {
+        // Continue with logout even if database deletion fails
+    }
+    
+    // Clear all session data
+    $_SESSION = array();
+    
+    // Destroy session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 3600, '/');
     }
     
     // Destroy session
     session_destroy();
-    jsonResponse(true, 'Sesión cerrada exitosamente', ['redirect' => 'login.html']);
+    
+    jsonResponse(true, 'Sesión cerrada exitosamente', ['redirect' => 'index.html']);
 }
 
 /**

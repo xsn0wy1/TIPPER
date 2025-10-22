@@ -37,6 +37,13 @@ langBtn.addEventListener("mouseout", () => {
 
   function setSpanish() {
     if (langBtn) langBtn.textContent = "EN";
+    
+    // Update guest menu button text
+    const guestLoginText = document.getElementById('guest-login-text');
+    if (guestLoginText) {
+      guestLoginText.textContent = "Iniciar sesión";
+    }
+    
     if (document.querySelector('#intro')) {
       document.querySelector('#intro h1').textContent = "Bienvenido a Tipper";
       document.querySelector('#intro p').textContent = "Consejos de tecnología para personas mayores";
@@ -256,6 +263,13 @@ if (window.location.pathname.includes('contact.html')) {
 
   function setEnglish() {
     if (langBtn) langBtn.textContent = "ES";
+    
+    // Update guest menu button text
+    const guestLoginText = document.getElementById('guest-login-text');
+    if (guestLoginText) {
+      guestLoginText.textContent = "Sign In";
+    }
+    
     if (document.querySelector('#intro')) {
       document.querySelector('#intro h1').textContent = "Welcome to Tipper";
       document.querySelector('#intro p').textContent = "Technology tips for seniors";
@@ -904,7 +918,15 @@ async function checkAndLoadUserSession() {
     const response = await fetch('PHP/auth.php?action=check_session');
     const result = await response.json();
     
+    const guestMenu = document.getElementById('guest-menu');
+    const userMenu = document.getElementById('user-menu');
+    const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
+    
     if (result.success) {
+      // User is logged in - show user menu, hide guest menu
+      if (guestMenu) guestMenu.style.display = 'none';
+      if (userMenu) userMenu.style.display = 'flex';
+      
       // Update user info in the page
       const menuUsername = document.getElementById('menu-username');
       if (menuUsername) {
@@ -928,7 +950,16 @@ async function checkAndLoadUserSession() {
         showWelcome: false
       }));
     } else {
-      // No active session
+      // User is not logged in - show guest menu, hide user menu
+      if (guestMenu) guestMenu.style.display = 'flex';
+      if (userMenu) userMenu.style.display = 'none';
+      
+      // Update guest menu text based on language
+      const guestLoginText = document.getElementById('guest-login-text');
+      if (guestLoginText) {
+        guestLoginText.textContent = lang === 'en' ? 'Sign In' : 'Iniciar sesión';
+      }
+      
       // Only redirect to login on protected pages
       const protectedPages = ['profile.html', 'profile-editing.html', 'settings.html'];
       const currentPage = window.location.pathname.split('/').pop();
@@ -940,6 +971,11 @@ async function checkAndLoadUserSession() {
     }
   } catch (error) {
     console.error('Error checking session:', error);
+    // On error, show guest menu by default
+    const guestMenu = document.getElementById('guest-menu');
+    const userMenu = document.getElementById('user-menu');
+    if (guestMenu) guestMenu.style.display = 'flex';
+    if (userMenu) userMenu.style.display = 'none';
   }
 }
 
