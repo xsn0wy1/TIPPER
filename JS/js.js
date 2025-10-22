@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Setup logout button
   setupLogoutButton();
+  
+  // Setup profile menu toggle
+  setupProfileMenuToggle();
 
   const nav = document.querySelector('nav');
   let langBtn = document.getElementById('lang-btn');
@@ -522,20 +525,8 @@ if (document.title.includes('Wi-Fi')) {
     };
   }
 
-  // Profile menu toggle
-  const pfpBtn = document.getElementById('pfp-btn');
-  const pfpMenu = document.getElementById('pfp-menu');
-  if (pfpBtn && pfpMenu) {
-    pfpBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      pfpMenu.classList.toggle('active');
-    });
-    document.addEventListener('click', function (e) {
-      if (!pfpMenu.contains(e.target) && e.target !== pfpBtn) {
-        pfpMenu.classList.remove('active');
-      }
-    });
-  }
+  // Profile menu toggle - moved to separate function
+  setupProfileMenuToggle();
 
   // Slideshow for #intro background
   const bgImages = [
@@ -933,6 +924,14 @@ async function checkAndLoadUserSession() {
         menuUsername.textContent = result.data.username;
       }
       
+      // Update profile page elements if they exist
+      if (document.getElementById('profile-name')) {
+        document.getElementById('profile-name').textContent = result.data.username;
+      }
+      if (document.getElementById('profile-email')) {
+        document.getElementById('profile-email').textContent = result.data.email;
+      }
+      
       // Update all profile pictures on the page
       const profilePics = document.querySelectorAll('#pfp-img, .pfp-big, #profile-pic, #edit-profile-pic');
       profilePics.forEach(pic => {
@@ -949,6 +948,16 @@ async function checkAndLoadUserSession() {
         profile_picture: result.data.profile_picture,
         showWelcome: false
       }));
+      
+      // Setup profile menu toggle after menu is visible
+      setTimeout(() => {
+        setupProfileMenuToggle();
+        
+        // Load full profile data if on profile page
+        if (typeof loadUserProfile === 'function') {
+          loadUserProfile();
+        }
+      }, 100);
     } else {
       // User is not logged in - show guest menu, hide user menu
       if (guestMenu) guestMenu.style.display = 'flex';
@@ -1008,16 +1017,43 @@ function setupLogoutButton() {
           
           // Redirect to login
           setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
           }, 1000);
         }
       } catch (error) {
         console.error('Error logging out:', error);
         // Force logout anyway
         localStorage.removeItem('tipperUser');
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
       }
     });
   }
 }
 
+/**
+ * Setup profile menu toggle functionality
+ */
+function setupProfileMenuToggle() {
+  const pfpBtn = document.getElementById('pfp-btn');
+  const pfpMenu = document.getElementById('pfp-menu');
+  
+  if (pfpBtn && pfpMenu) {
+    // Check if listener already added
+    if (pfpBtn.dataset.listenerAdded) {
+      return;
+    }
+    
+    pfpBtn.dataset.listenerAdded = 'true';
+    
+    pfpBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      pfpMenu.classList.toggle('active');
+    });
+    
+    document.addEventListener('click', function (e) {
+      if (!pfpMenu.contains(e.target) && !pfpBtn.contains(e.target)) {
+        pfpMenu.classList.remove('active');
+      }
+    });
+  }
+}
