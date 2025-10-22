@@ -905,18 +905,27 @@ function checkWelcomeNotification() {
  * Check user session and load user data
  */
 async function checkAndLoadUserSession() {
+  console.log('Checking user session...');
   try {
     const response = await fetch('PHP/auth.php?action=check_session');
     const result = await response.json();
+    console.log('Session check result:', result);
     
     const guestMenu = document.getElementById('guest-menu');
     const userMenu = document.getElementById('user-menu');
     const lang = localStorage.getItem('tipperLang') === 'en' ? 'en' : 'es';
     
     if (result.success) {
+      console.log('User is logged in:', result.data.username);
       // User is logged in - show user menu, hide guest menu
-      if (guestMenu) guestMenu.style.display = 'none';
-      if (userMenu) userMenu.style.display = 'flex';
+      if (guestMenu) {
+        guestMenu.style.display = 'none';
+        console.log('Guest menu hidden');
+      }
+      if (userMenu) {
+        userMenu.style.display = 'flex';
+        console.log('User menu shown');
+      }
       
       // Update user info in the page
       const menuUsername = document.getElementById('menu-username');
@@ -959,9 +968,16 @@ async function checkAndLoadUserSession() {
         }
       }, 100);
     } else {
+      console.log('User is NOT logged in');
       // User is not logged in - show guest menu, hide user menu
-      if (guestMenu) guestMenu.style.display = 'flex';
-      if (userMenu) userMenu.style.display = 'none';
+      if (guestMenu) {
+        guestMenu.style.display = 'flex';
+        console.log('Guest menu shown');
+      }
+      if (userMenu) {
+        userMenu.style.display = 'none';
+        console.log('User menu hidden');
+      }
       
       // Update guest menu text based on language
       const guestLoginText = document.getElementById('guest-login-text');
@@ -974,6 +990,7 @@ async function checkAndLoadUserSession() {
       const currentPage = window.location.pathname.split('/').pop();
       
       if (protectedPages.includes(currentPage)) {
+        console.log('Protected page - redirecting to login');
         // Redirect to login with return URL
         window.location.href = 'login.html?return=' + encodeURIComponent(currentPage);
       }
@@ -983,8 +1000,14 @@ async function checkAndLoadUserSession() {
     // On error, show guest menu by default
     const guestMenu = document.getElementById('guest-menu');
     const userMenu = document.getElementById('user-menu');
-    if (guestMenu) guestMenu.style.display = 'flex';
-    if (userMenu) userMenu.style.display = 'none';
+    if (guestMenu) {
+      guestMenu.style.display = 'flex';
+      console.log('Error - showing guest menu');
+    }
+    if (userMenu) {
+      userMenu.style.display = 'none';
+      console.log('Error - hiding user menu');
+    }
   }
 }
 
@@ -1037,16 +1060,21 @@ function setupProfileMenuToggle() {
   const pfpBtn = document.getElementById('pfp-btn');
   const pfpMenu = document.getElementById('pfp-menu');
   
+  console.log('Setting up profile menu toggle', { pfpBtn, pfpMenu });
+  
   if (pfpBtn && pfpMenu) {
     // Check if listener already added
     if (pfpBtn.dataset.listenerAdded) {
+      console.log('Profile menu listener already added');
       return;
     }
     
     pfpBtn.dataset.listenerAdded = 'true';
+    console.log('Adding click listener to profile button');
     
     pfpBtn.addEventListener('click', function (e) {
       e.stopPropagation();
+      console.log('Profile button clicked, toggling menu');
       pfpMenu.classList.toggle('active');
     });
     
@@ -1055,5 +1083,7 @@ function setupProfileMenuToggle() {
         pfpMenu.classList.remove('active');
       }
     });
+  } else {
+    console.warn('Profile button or menu not found');
   }
 }

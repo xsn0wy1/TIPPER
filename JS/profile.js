@@ -151,12 +151,15 @@ document.addEventListener("DOMContentLoaded", function () {
  * Load user profile from database
  */
 async function loadUserProfile() {
+  console.log('Loading user profile from database...');
   try {
     const response = await fetch('PHP/user.php?action=get_profile');
     const result = await response.json();
+    console.log('Profile load result:', result);
 
     if (result.success) {
       const user = result.data;
+      console.log('User data:', user);
       
       // Update form fields if they exist
       if (document.getElementById('edit-name')) {
