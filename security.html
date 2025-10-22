@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Seguridad en Internet | Tipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/css.css">
+  <script src="./JS/js.js"></script>
+  <link rel="icon" type="image/png" href="Elements/favicon.png">
+</head>
+<body>
+  <header>
+    <div id="logo">
+      <img src="Elements/logo.png" alt="Tipper logo" id="logo-img" />
+      <span id="logo-text">Tipper</span>
+    </div>
+    <nav>
+      <a href="index.html" id="nav-inicio">Inicio</a>
+      <a href="calls.html" id="nav-videollamadas">Videollamadas</a>
+      <a href="passwords.html" id="nav-contrasenas">Contraseñas</a>
+      <a href="internet.html" id="nav-internet">Internet</a>
+      <a href="contact.html" id="nav-contacto">Contacto</a>
+      <div class="pfp-menu-container">
+        <!-- Not Logged In Version -->
+        <div id="guest-menu" class="guest-menu" style="display: none;">
+          <a href="login.html" class="login-btn" id="guest-login-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span id="guest-login-text">Iniciar sesión</span>
+          </a>
+        </div>
+        
+        <!-- Logged In Version -->
+        <div id="user-menu" class="user-menu" style="display: none;">
+          <button id="pfp-btn">
+            <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
+          </button>
+          <div id="pfp-menu" class="pfp-menu">
+            <img src="./Elements/pfp.jpg" alt="Perfil grande" class="pfp-big" />
+            <ul>
+              <li><h3 id="menu-username">Usuario</h3></li>
+              <li><a href="profile.html" id="menu-profile">Mi perfil</a></li>
+              <li><a href="settings.html" id="menu-settings">Configuración</a></li>
+              <li><a href="#" id="menu-logout">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </div>
+    </div>
+    </nav>
+  </header>
+  <main>
+    <article class="card" style="margin:2em auto;max-width:600px;">
+      <h1 id="security-title">Seguridad en Internet</h1>
+      <p id="security-intro">Proteger tus datos personales en internet es muy importante. Aquí te damos consejos para mantenerte seguro:</p>
+      <h3 id="security-tips-title">Consejos de seguridad:</h3>
+      <ul>
+        <li id="security-tips-1"><strong>Contraseñas fuertes:</strong> Usa contraseñas largas con letras, números y símbolos.</li>
+        <li id="security-tips-2"><strong>No compartas información personal:</strong> Nunca envíes contraseñas, números de tarjeta o datos bancarios por correo.</li>
+        <li id="security-tips-3"><strong>Verifica los enlaces:</strong> Antes de hacer clic, asegurate de que la dirección sea correcta.</li>
+        <li id="security-tips-4"><strong>Mantén actualizado tu dispositivo:</strong> Las actualizaciones corrigen problemas de seguridad.</li>
+      </ul>
+      <h3 id="security-warning-title">¡Cuidado con las estafas!</h3>
+      <ul>
+        <li id="security-warning-1">No contestes correos sospechosos que pidan tus datos.</li>
+        <li id="security-warning-2">Los bancos nunca piden contraseñas por teléfono o correo.</li>
+        <li id="security-warning-3">Si algo parece demasiado bueno para ser verdad, probablemente sea una estafa.</li>
+      </ul>
+      <a href="index.html" id="back-link" style="display:inline-block;margin-top:1.5em;color:#4f8cff;text-decoration:underline;">&#8592; Volver al inicio</a>
+    </article>
+  </main>
+  <footer>
+    <p>&copy; 2025 Tipper</p>
+  </footer>
+</body>
+</html>

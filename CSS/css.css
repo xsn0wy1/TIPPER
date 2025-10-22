@@ -1,0 +1,1195 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #ededed;
+  color: #232323;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #ededed;
+  color: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5em 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+#logo-img {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  background: #ededed;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+#logo-text {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #232323;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-wrap: nowrap;
+  gap: 0.5em;
+}
+
+nav a {
+  display: inline-block;
+  margin: 0 0.6em;
+  font-size: 1.1em;
+  color: #232323;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+nav a:hover {
+  color: #4f8cff;
+}
+
+#intro {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.intro-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 340px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  #intro, .intro-bg {
+    min-height: 200px;
+    height: 200px;
+  }
+  .intro-bg {
+    height: 200px;
+  }
+}
+
+.intro-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s;
+  z-index: 0;
+}
+
+.intro-bg-image.active {
+  opacity: 0.45;
+}
+
+.intro-bg-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(255,255,255,0.65);
+  z-index: 1;
+  pointer-events: none;
+}
+
+#intro h1, #intro p {
+  position: relative;
+  z-index: 2;
+}
+
+#intro h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+  color: #232323;
+}
+
+#intro p {
+  font-size: 1.3em;
+  color: #444;
+}
+
+#tips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+  padding: 2em 1em;
+}
+
+.tip-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  object-position: center;
+  position: absolute;
+  top: 1.25em;
+  right: 1.25em;
+  z-index: 2;
+  padding: 0;
+  display: block;
+}
+
+.card {
+  position: relative;
+  background: #ededed;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(35,35,35,0.08);
+  padding: 2em 1.5em;
+  max-width: 340px;
+  min-width: 260px;
+  flex: 1 1 300px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid #4f8cff;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(35,35,35,0.13);
+  border-color: #232323;
+}
+
+.card h2 {
+  color: #232323;
+  font-size: 1.3em;
+  margin-bottom: 0.7em;
+}
+
+.card p {
+  color: #444;
+  font-size: 1.1em;
+}
+
+footer {
+  background: #232323;
+  color: #ededed;
+  text-align: center;
+  padding: 1.2em 0;
+  margin-top: 2em;
+  border-radius: 24px 24px 0 0;
+  font-size: 1em;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pfp-menu-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 1.5em;
+}
+
+.pfp-menu-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.8em;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* Guest Menu (Not Logged In) */
+.guest-menu {
+  display: flex;
+  align-items: center;
+}
+
+.guest-menu .login-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 1em;
+  background: #4f8cff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95em;
+  border-radius: 20px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.2);
+  white-space: nowrap;
+}
+
+.guest-menu .login-btn:hover {
+  background: #3d7ae8;
+  box-shadow: 0 4px 16px rgba(79,140,255,0.3);
+  transform: translateY(-1px);
+}
+
+.guest-menu .login-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* User Menu (Logged In) */
+.user-menu {
+  display: flex;
+  align-items: center;
+}
+
+#pfp-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  display: flex;
+  align-items: center;
+  height: 38px;
+}
+
+#pfp-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4f8cff;
+  background: #ededed;
+  transition: box-shadow 0.2s;
+  display: block;
+}
+
+#pfp-btn:focus #pfp-img,
+#pfp-btn:hover #pfp-img {
+  box-shadow: 0 0 0 3px #4f8cff44;
+}
+
+#lang-btn {
+  margin-left: 1em;
+  padding: 0.4em 1em;
+  border-radius: 6px;
+  border: none;
+  background: #4f8cff;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1em;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.pfp-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(35,35,35,0.13);
+  padding: 1.2em 1.5em 1em 1.5em;
+  min-width: 180px;
+  z-index: 100;
+  text-align: center;
+}
+
+.pfp-menu.active {
+  display: block;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.pfp-big {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4f8cff;
+  background: #ededed;
+}
+
+.pfp-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pfp-menu li {
+  margin: 0.7em 0; 
+}
+
+.pfp-menu a {
+  color: #232323;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.pfp-menu a:hover {
+  color: #4f8cff;
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5em;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.07);
+  border: 1.5px solid #dbeafe;
+  padding: 0.15em 0.7em 0.15em 1em;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.nav-search:focus-within {
+  box-shadow: 0 4px 16px rgba(79,140,255,0.13);
+  border-color: #4f8cff;
+}
+
+#search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.08em;
+  font-family: inherit;
+  color: #232323;
+  width: 100%;
+  padding: 0.6em 0.5em 0.6em 0;
+}
+
+#search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0.2em;
+  display: flex;
+  align-items: center;
+  transition: filter 0.2s;
+}
+
+#search-btn:hover svg {
+  filter: brightness(1.3);
+}
+
+/* dark mode — improved, comprehensive theme */
+body.dark-mode {
+  --bg: #0b0f12;            /* page background */
+  --panel: #0f1720;         /* panels, header, footer */
+  --card: #0b1418;          /* card backgrounds */
+  --muted: #9aa8b2;         /* secondary text */
+  --text: #e6f4fb;          /* primary text */
+  --accent: #4f8cff;        /* brand accent */
+  --accent-weak: #2b5fb8;
+  --danger: #ffb400;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+/* Global elements in dark mode */
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode .settings-main,
+body.dark-mode .profile-main,
+body.dark-mode .edit-profile-main,
+body.dark-mode .card,
+body.dark-mode #faq-bot-chat,
+body.dark-mode .pfp-menu,
+body.dark-mode .bookmarks-panel,
+body.dark-mode .bookmarked-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)) , var(--panel) !important;
+  color: var(--text) !important;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Typography and links */
+body.dark-mode nav a,
+body.dark-mode .pfp-menu a,
+body.dark-mode #logo-text,
+body.dark-mode .settings-main h1,
+body.dark-mode .card h2,
+body.dark-mode .card p,
+body.dark-mode .profile-info-list li,
+body.dark-mode footer p {
+  color: var(--text) !important;
+}
+
+/* Guest menu dark mode */
+body.dark-mode .guest-menu .login-btn {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(79,140,255,0.3);
+}
+
+body.dark-mode .guest-menu .login-btn:hover {
+  background: #5a96ff;
+  box-shadow: 0 4px 20px rgba(79,140,255,0.4);
+}
+body.dark-mode h1 {
+  color: #fff !important;
+}
+body.dark-mode .profile-name {
+  color: #ffffff !important;
+}
+body.dark-mode p,
+body.dark-mode small,
+body.dark-mode .faq-bot-msg {
+  color: var(--muted) !important;
+}
+body.dark-mode a,
+body.dark-mode nav a:hover {
+  color: var(--accent) !important;
+}
+
+/* Inputs, selects, search */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode #search-input,
+body.dark-mode .nav-search {
+  background: rgba(255,255,255,0.02) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: none !important;
+}
+body.dark-mode ::placeholder {
+  color: rgba(230,244,251,0.5) !important;
+}
+
+/* Buttons and controls */
+body.dark-mode #lang-btn,
+body.dark-mode .bookmark-btn,
+body.dark-mode #faq-bot-btn,
+body.dark-mode .bookmarked-open,
+body.dark-mode .bookmarked-remove,
+body.dark-mode .profile-actions button,
+body.dark-mode .settings-group .switch {
+  background: rgba(255,255,255,0.03) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* Profile picture and avatars */
+body.dark-mode #pfp-img,
+body.dark-mode .pfp-big,
+body.dark-mode #logo-img {
+  border-color: var(--accent) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Bookmark button appearance */
+body.dark-mode .bookmark-btn {
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+body.dark-mode .bookmark-btn .bookmark-icon { color: var(--accent); }
+body.dark-mode .bookmark-btn.active { background: linear-gradient(180deg, rgba(79,140,255,0.12), rgba(79,140,255,0.06)); }
+body.dark-mode .bookmark-btn.active .bookmark-icon { color: var(--danger); }
+
+/* FAQ bot */
+body.dark-mode #faq-bot-chat {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  color: var(--text);
+}
+body.dark-mode #faq-bot-btn { background: var(--accent) !important; color: #fff !important; }
+body.dark-mode #faq-bot-btn:hover { background: var(--accent-weak) !important; }
+
+/* Bookmarks panel and bookmarked cards */
+body.dark-mode .bookmarks-panel {
+  border-left: 1px solid rgba(255,255,255,0.03);
+}
+body.dark-mode .bookmarked-card {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+body.dark-mode .bookmarked-card-actions button {
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Intro background bar for legibility */
+body.dark-mode .intro-bg-bar {
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
+}
+
+/* Ensure contrast for focus states */
+body.dark-mode :focus {
+  outline: 3px solid rgba(79,140,255,0.14);
+  outline-offset: 2px;
+}
+
+/* Keep small decorative images visible (avoid full inversion) */
+body.dark-mode img {
+  filter: none !important;
+}
+
+/* High contrast tweak (kept separate) */
+body.high-contrast {
+  filter: contrast(1.3) brightness(1.08);
+}
+
+/* make switching smoother */
+body, header, .card, .pfp-menu, .bookmarks-panel {
+  transition: background 220ms ease, color 220ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+/* FAQ Bot Styles */
+#faq-bot-container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+#faq-bot-btn {
+  background: #4f8cff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 2px 12px rgba(35,35,35,0.13);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#faq-bot-btn img {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(0.2);
+}
+
+#faq-bot-btn:hover {
+  background: #232323;
+}
+
+#faq-bot-chat {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 320px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(35,35,35,0.18);
+  padding: 1.2em 1em 1em 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  animation: fadeIn 0.2s;
+}
+
+#faq-bot-chat.faq-bot-hidden {
+  display: none;
+}
+
+.faq-bot-hidden {
+  display: none;
+}
+
+#faq-bot-header {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #4f8cff;
+  margin-bottom: 0.5em;
+}
+
+#faq-bot-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+
+.faq-bot-msg {
+  background: #ededed;
+  border-radius: 10px;
+  padding: 0.7em 1em;
+  color: #232323;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+
+.faq-bot-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.faq-bot-option {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1em;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.faq-bot-option:hover {
+  background: #232323;
+}
+
+#faq-bot-close {
+  background: none;
+  border: none;
+  color: #4f8cff;
+  font-size: 1.3em;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#faq-bot-close:hover {
+  color: #232323;
+}
+
+/* Bookmark button for tip cards */
+.bookmark-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.9);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(35,35,35,0.08);
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), background 160ms, box-shadow 160ms;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.bookmark-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(35,35,35,0.12); }
+
+.bookmark-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  transition: transform 260ms ease, color 200ms ease;
+  color: #4f8cff; /* stroke / fill color when active */
+}
+.bookmark-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: fill 200ms ease, stroke 200ms ease;
+}
+
+/* active = saved */
+.bookmark-btn.active {
+  background: linear-gradient(180deg, rgba(79,140,255,0.12), rgba(79,140,255,0.06));
+  box-shadow: 0 10px 28px rgba(79,140,255,0.12);
+  transform: translateY(-2px) scale(1.02);
+}
+.bookmark-btn.active .bookmark-icon { transform: scale(1.06); color: #ffb400; }
+.bookmark-btn.active .bookmark-icon path { fill: currentColor; stroke: currentColor; }
+
+/* keyboard focus */
+.bookmark-btn:focus {
+  box-shadow: 0 8px 28px rgba(79,140,255,0.14), 0 0 0 4px rgba(79,140,255,0.06);
+}
+
+#tips {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3em 0;
+  background: transparent;
+}
+
+/* keeps arrows vertically centered */
+#tips .arrow {
+  position: absolute;
+  top: 50%;
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 10;
+  outline: none;
+  user-select: none;
+  margin-top: -22.5px; /* half of height for perfect centering */
+  transform: none !important; /* prevent any transform from being applied */
+  will-change: auto;
+}
+
+#tips .arrow.left {
+  left: 1.5em;
+}
+#tips .arrow.right {
+  right: 1.5em;
+}
+
+#tips .arrow:hover {
+  background: #232323;
+  transform: none !important;
+}
+
+#tips .arrow:active {
+  background: #1a1a1a;
+  transform: none !important;
+}
+
+/* the main container with the tips */
+.tips-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 3em;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.tips-group {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2em;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.tips-group.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  position: relative;
+}
+
+.tips-group.exit-left {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.tips-group.exit-right {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.tips-group .card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tips-group .card:hover {
+  transform: translateY(-5px);
+}
+
+.tips-group .card h2 {
+  margin: 0.3em 0 0.2em 0;
+  font-size: 1.25rem;
+}
+
+.tips-group .card p {
+  margin: 0;
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+.tips-group a,
+.tips-group a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* remove random bottom gap caused by line-height or margins */
+.tips-container, .tips-group {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+/* ============================================
+   RESPONSIVE STYLES - MOBILE & TABLET
+   ============================================ */
+
+/* Tablet & smaller desktop (max-width: 1100px) */
+@media (max-width: 1100px) {
+  .tips-container {
+    max-width: 900px;
+    padding: 0 2em;
+  }
+  
+  #tips .arrow {
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    font-size: 1.3em;
+  }
+  
+  #tips .arrow.left {
+    left: 1em;
+  }
+  
+  #tips .arrow.right {
+    right: 1em;
+  }
+}
+
+/* Tablet (max-width: 900px) */
+@media (max-width: 900px) {
+  header {
+    padding: 1.2em 1.5em;
+  }
+  
+  #logo-text {
+    font-size: 1.6em;
+  }
+  
+  nav a {
+    margin: 0 0.5em;
+    font-size: 1em;
+  }
+  
+  .pfp-menu-container {
+    margin-left: 0.6em;
+  }
+  
+  .guest-menu .login-btn {
+    padding: 0.5em 0.95em;
+    font-size: 0.9em;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  .tips-container {
+    padding: 0 1.5em;
+  }
+  
+  .tips-group {
+    gap: 1.5em;
+  }
+  
+  .card {
+    padding: 1.3em;
+  }
+}
+
+/* Mobile landscape & small tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+  }
+  
+  nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    margin: 0.4em 0.5em;
+    font-size: 0.95em;
+  }
+  
+  .pfp-menu-container {
+    margin-left: 0.5em;
+  }
+  
+  .guest-menu .login-btn {
+    padding: 0.45em 0.9em;
+    font-size: 0.9em;
+  }
+  
+  #intro {
+    padding: 2em 1em;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .intro-subtitle {
+    font-size: 1em;
+  }
+  
+  /* Stack tip cards vertically on tablets */
+  .tips-container {
+    padding: 0 1em;
+  }
+  
+  .tips-group {
+    flex-direction: column;
+    gap: 1.2em;
+  }
+  
+  .tips-group .card {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Hide arrows and disable carousel on mobile */
+  #tips .arrow {
+    display: none;
+  }
+  
+  /* Show all tip groups on mobile */
+  .tips-group {
+    position: relative !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Adjust FAQ bot for mobile */
+  #faq-bot {
+    bottom: 15px;
+    right: 15px;
+    width: 55px;
+    height: 55px;
+    font-size: 1.6em;
+  }
+  
+  #faq-bot-chat {
+    width: 90vw;
+    max-width: 320px;
+    bottom: 80px;
+    right: 10px;
+    padding: 1em 0.8em 0.8em 0.8em;
+  }
+}
+
+/* Mobile portrait (max-width: 600px) */
+@media (max-width: 600px) {
+  #logo-img {
+    height: 40px;
+    width: 40px;
+  }
+  
+  #logo-text {
+    font-size: 1.4em;
+  }
+  
+  nav a {
+    font-size: 0.95em;
+    margin: 0.4em 0.5em;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+  
+  .intro-subtitle {
+    font-size: 0.95em;
+  }
+  
+  .card {
+    padding: 1.2em;
+  }
+  
+  .card h2 {
+    font-size: 1.1em;
+  }
+  
+  .card p {
+    font-size: 0.95em;
+  }
+  
+  .tip-icon {
+    width: 28px;
+    height: 28px;
+    right: 1em;
+  }
+  
+  footer {
+    font-size: 0.9em;
+    padding: 1em 0.5em;
+  }
+  
+  /* Bookmark button sizing */
+  .bookmark-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .bookmark-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.8em;
+  }
+  
+  #logo {
+    gap: 0.5em;
+  }
+  
+  #logo-img {
+    height: 36px;
+    width: 36px;
+  }
+  
+  #logo-text {
+    font-size: 1.2em;
+  }
+  
+  nav a {
+    font-size: 0.9em;
+    margin: 0.3em 0.4em;
+  }
+  
+  #intro {
+    padding: 1.5em 0.8em;
+  }
+  
+  h1 {
+    font-size: 1.3em;
+  }
+  
+  .intro-subtitle {
+    font-size: 0.9em;
+  }
+  
+  .tips-container {
+    padding: 0 0.5em;
+  }
+  
+  .tips-group {
+    gap: 1em;
+  }
+  
+  .card {
+    padding: 1em;
+  }
+  
+  .card h2 {
+    font-size: 1em;
+  }
+  
+  .card p {
+    font-size: 0.9em;
+  }
+  
+  .tip-icon {
+    width: 24px;
+    height: 24px;
+    right: 0.8em;
+  }
+  
+  #faq-bot {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4em;
+    bottom: 12px;
+    right: 12px;
+  }
+  
+  #faq-bot-chat {
+    width: 95vw;
+    bottom: 70px;
+    right: 5px;
+  }
+}
+
+/* Extra small mobile (max-width: 360px) */
+@media (max-width: 360px) {
+  #logo-text {
+    font-size: 1em;
+  }
+  
+  nav a {
+    font-size: 0.85em;
+    margin: 0.2em 0.3em;
+  }
+  
+  h1 {
+    font-size: 1.2em;
+  }
+  
+  .intro-subtitle {
+    font-size: 0.85em;
+  }
+  
+  .card h2 {
+    font-size: 0.95em;
+  }
+  
+  .card p {
+    font-size: 0.85em;
+  }
+}
