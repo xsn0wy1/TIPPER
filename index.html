@@ -7,9 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/css.css">
   <link rel="stylesheet" href="CSS/notification.css">
-  <script src="JS/notification.js"></script>
-  <script src="JS/js.js"></script>
-  <script src="JS/faq.js"></script>
   <link rel="icon" type="image/png" href="Elements/favicon.png">
 </head>
 <body>
@@ -33,8 +30,8 @@
         </button>
       </form>
       <div class="pfp-menu-container">
-        <!-- Not Logged In Version (Hidden by default, shown by JS if not logged in) -->
-        <div id="guest-menu" class="guest-menu" style="display: none;">
+        <!-- Not Logged In Version (Shown by default until JS checks session) -->
+        <div id="guest-menu" class="guest-menu" style="display: flex;">
           <a href="login.html" class="login-btn" id="guest-login-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
@@ -45,7 +42,7 @@
           </a>
         </div>
         
-        <!-- Logged In Version (Hidden if not logged in) -->
+        <!-- Logged In Version (Hidden by default, shown by JS if logged in) -->
         <div id="user-menu" class="user-menu" style="display: none;">
           <button id="pfp-btn">
             <img src="./Elements/pfp.jpg" alt="Perfil" id="pfp-img" />
@@ -135,5 +132,8 @@
       <button id="faq-bot-close" aria-label="Cerrar ayuda">✕</button>
     </div>
   </div>
+  <script src="JS/notification.js"></script>
+  <script src="JS/js.js"></script>
+  <script src="JS/faq.js"></script>
 </body>
 </html>
